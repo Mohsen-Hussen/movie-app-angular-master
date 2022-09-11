@@ -1,0 +1,55 @@
+<div class="row m-2">
+    <h2 class="pt-4">Movies</h2>
+    <p>** plz note that any unreasable presented data is from TMDB APIs side..</p>
+    <mat-tab-group (selectedTabChange)="onChangeTab($event)">
+        <mat-tab [label]="tab.replace('_', ' ') | titlecase" *ngFor="let tab of moviesFilterationTabs">
+            <table mat-table [dataSource]="movies" class="mat-elevation-z8">
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- Title Column -->
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef> Title </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <!-- Adult Column -->
+                <ng-container matColumnDef="adult">
+                    <th mat-header-cell *matHeaderCellDef> For Adult </th>
+                    <td mat-cell *matCellDef="let element"> {{element.adult ? 'Yes' : 'No'}} </td>
+                </ng-container>
+
+                <!-- Release Date Column -->
+                <ng-container matColumnDef="release_date">
+                    <th mat-header-cell *matHeaderCellDef> Release Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.release_date}} </td>
+                </ng-container>
+
+                <!-- Vote Average Column -->
+                <ng-container matColumnDef="vote_average">
+                    <th mat-header-cell *matHeaderCellDef> Rate </th>
+                    <td mat-cell *matCellDef="let element"> {{element.vote_average}} </td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let element" class="btn btn-success text-center customBtn">
+                        <button (click)="onViewMovie(element?.id)" mat-button> Details</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator showFirstLastButtons (page)="onChangePage($event)" [length]="totalMoviesCount">
+            </mat-paginator>
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>

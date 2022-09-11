@@ -1,0 +1,18 @@
+<!-- Toolbar -->
+<mat-toolbar *ngIf="authService.isLoggedIn" color="primary" class="header">
+  <div routerLink="/" class="cursor-pointer btn btn-primary">Movies Store </div>
+  <span class="nav-tool-items">
+    <mat-list class="d-flex">
+      <mat-list-item class="nav-item">
+        <button mat-button routerLink="/">All Movies</button>
+      </mat-list-item>
+      <mat-list-item class="nav-item">
+        <button mat-button>Favorite Movies</button>
+      </mat-list-item>
+      <mat-list-item class="nav-item">
+        <button (click)="authService.signOut()" mat-button>Logout</button>
+      </mat-list-item>
+    </mat-list>
+  </span>
+</mat-toolbar>
+<router-outlet></router-outlet>
